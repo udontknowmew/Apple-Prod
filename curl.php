@@ -1,7 +1,7 @@
 <?php
 namespace Curl;
 
-class CaseInsensitiveArray implements \ArrayAccess, \Countable, \Iterator
+class CaseInsensitiveArray
 {
 
     /**
@@ -2070,25 +2070,25 @@ class Curl
      */
     private function parseHeaders($raw_headers)
     {
-        $raw_headers = preg_split('/\r\n/', $raw_headers, null, PREG_SPLIT_NO_EMPTY);
-        $http_headers = new CaseInsensitiveArray();
-
-        $raw_headers_count = count($raw_headers);
-        for ($i = 1; $i < $raw_headers_count; $i++) {
-            if (strpos($raw_headers[$i], ':') !== false) {
-                list($key, $value) = explode(':', $raw_headers[$i], 2);
-                $key = trim($key);
-                $value = trim($value);
-                // Use isset() as array_key_exists() and ArrayAccess are not compatible.
-                if (isset($http_headers[$key])) {
-                    $http_headers[$key] .= ',' . $value;
-                } else {
-                    $http_headers[$key] = $value;
-                }
-            }
-        }
-
-        return array(isset($raw_headers['0']) ? $raw_headers['0'] : '', $http_headers);
+        // $raw_headers = preg_split('/\r\n/', $raw_headers, null, PREG_SPLIT_NO_EMPTY);
+        // $http_headers = new CaseInsensitiveArray();
+        // 
+        // $raw_headers_count = count($raw_headers);
+        // for ($i = 1; $i < $raw_headers_count; $i++) {
+        //     if (strpos($raw_headers[$i], ':') !== false) {
+        //         list($key, $value) = explode(':', $raw_headers[$i], 2);
+        //         $key = trim($key);
+        //         $value = trim($value);
+        //         // Use isset() as array_key_exists() and ArrayAccess are not compatible.
+        //         if (isset($http_headers[$key])) {
+        //             $http_headers[$key] .= ',' . $value;
+        //         } else {
+        //             $http_headers[$key] = $value;
+        //         }
+        //     }
+        // }
+        // 
+        // return array(isset($raw_headers['0']) ? $raw_headers['0'] : '', $http_headers);
     }
 
     /**
@@ -2101,13 +2101,13 @@ class Curl
      */
     private function parseRequestHeaders($raw_headers)
     {
-        $request_headers = new CaseInsensitiveArray();
-        list($first_line, $headers) = $this->parseHeaders($raw_headers);
-        $request_headers['Request-Line'] = $first_line;
-        foreach ($headers as $key => $value) {
-            $request_headers[$key] = $value;
-        }
-        return $request_headers;
+        // $request_headers = new CaseInsensitiveArray();
+        // list($first_line, $headers) = $this->parseHeaders($raw_headers);
+        // $request_headers['Request-Line'] = $first_line;
+        // foreach ($headers as $key => $value) {
+        //     $request_headers[$key] = $value;
+        // }
+        // return $request_headers;
     }
 
     /**
@@ -2163,22 +2163,22 @@ class Curl
      */
     private function parseResponseHeaders($raw_response_headers)
     {
-        $response_header_array = explode("\r\n\r\n", $raw_response_headers);
-        $response_header  = '';
-        for ($i = count($response_header_array) - 1; $i >= 0; $i--) {
-            if (stripos($response_header_array[$i], 'HTTP/') === 0) {
-                $response_header = $response_header_array[$i];
-                break;
-            }
-        }
-
-        $response_headers = new CaseInsensitiveArray();
-        list($first_line, $headers) = $this->parseHeaders($response_header);
-        $response_headers['Status-Line'] = $first_line;
-        foreach ($headers as $key => $value) {
-            $response_headers[$key] = $value;
-        }
-        return $response_headers;
+        // $response_header_array = explode("\r\n\r\n", $raw_response_headers);
+        // $response_header  = '';
+        // for ($i = count($response_header_array) - 1; $i >= 0; $i--) {
+        //     if (stripos($response_header_array[$i], 'HTTP/') === 0) {
+        //         $response_header = $response_header_array[$i];
+        //         break;
+        //     }
+        // }
+        // 
+        // $response_headers = new CaseInsensitiveArray();
+        // list($first_line, $headers) = $this->parseHeaders($response_header);
+        // $response_headers['Status-Line'] = $first_line;
+        // foreach ($headers as $key => $value) {
+        //     $response_headers[$key] = $value;
+        // }
+        // return $response_headers;
     }
 
     /**
