@@ -1,5 +1,3 @@
-<?php
-
 namespace Curl;
 
 use Curl\ArrayUtil;
