@@ -1,9 +1,6 @@
 <?php
 namespace Curl;
 
-use Curl\ArrayUtil;
-use Curl\Decoder;
-
 class Curl
 {
     const VERSION = '8.8.0';
