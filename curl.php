@@ -2232,7 +2232,7 @@ class Curl
         $this->setOpt(CURLOPT_HEADERFUNCTION, createHeaderCallback($header_callback_data));
 
         $this->setOpt(CURLOPT_RETURNTRANSFER, true);
-        $this->headers = new CaseInsensitiveArray();
+        // $this->headers = new CaseInsensitiveArray();
         $this->setUrl($base_url);
     }
 }
