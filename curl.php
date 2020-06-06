@@ -1,3 +1,4 @@
+<?php
 namespace Curl;
 
 use Curl\ArrayUtil;
@@ -1832,3 +1833,4 @@ function createHeaderCallback($header_callback_data) {
         return strlen($header);
     };
 }
+?>
